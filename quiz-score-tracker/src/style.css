@@ -1,0 +1,172 @@
+/* === GENERELL STIL === */
+:root{
+    /* Lengden på tråden – juster ved behov */
+    --thread: 16px;
+  }
+  
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #0a0737;
+      margin: 0;
+      padding: 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+  }
+  
+  h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+  }
+  
+  /* === CONTAINER === */
+  .container {
+      width: min(95vw, 800px);
+      margin: 0 auto;
+      background: #ded9d9;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+  }
+  
+  /* === DELTAKERLISTE === */
+  .participants {
+      display: flex;
+      flex-direction: column;   /* stabler vertikalt */
+      gap: 16px;
+      align-items: stretch;
+  }
+  
+  /* === DELTAKER-KORT === */
+  .participant {
+      position: relative;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: calc(14px + var(--thread)) 16px 14px 16px; /* plass til tråd på toppen */
+      background-color: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+  }
+  
+  .participant:hover { transform: translateY(-3px); }
+  
+  /* === TEKST OG KNAPPER === */
+  h2 {
+      margin: 0;
+      color: #333;
+      font-size: 1rem;
+      font-weight: 600;
+      flex: 1 1 auto;
+      text-align: left;
+  }
+  
+  p { margin: 0; color: #555; font-size: 0.95rem; }
+  
+  .score { font-weight: bold; color: #007bff; }
+  
+  button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background-color 0.2s ease;
+  }
+  button:hover { background-color: #218838; }
+  
+  /* === JULEKULE === */
+  .christmas-ball {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      background-color: red;   /* enkel, flat rød */
+      border-radius: 50%;
+      margin: 0 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;       /* tråd og snopp skal synes */
+      align-self: flex-start;  /* plasseres i toppen av kortet */
+  }
+  
+  /* GULLTRÅDEN: stopper ved toppen av kortet */
+  .ball-thread {
+      position: absolute;
+      top: calc(-1 * var(--thread));
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: var(--thread);
+      background-color: gold;
+  }
+  
+  /* GULLSNOPP / FESTEKNAPP */
+  .ball-cap {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 8px;
+      background-color: gold;
+      border-radius: 2px 2px 0 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  /* === BILDE I KULA === */
+  /* Ring + subtil fade inn mot kanten */
+  .christmas-ball img {
+      width: 88%;
+      height: 88%;
+      margin: 6%;                 /* jevn rød ring fra kula */
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+  
+      /* myk fade mot ytterkant (støttes i moderne nettlesere) */
+      -webkit-mask-image: radial-gradient(circle at 50% 50%,
+          rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(circle at 50% 50%,
+          rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
+  }
+  .snow-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 9999;
+  }
+  
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: blur(1px);
+    animation: snowFall linear infinite;
+  }
+  
+  @keyframes snowFall {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    100% { transform: translateY(110vh) translateX(30px); opacity: 0.6; }
+  }
+  
